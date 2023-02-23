@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  height: 100vh;
 }
 
 .App-logo {
@@ -35,4 +42,32 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+td,
+th {
+  border: 1px solid black;
+}
+
+.response-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.graph-representation {
+  height: 500px;
+  width: 100%;
+}
+
+.PrizeDistribution-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }

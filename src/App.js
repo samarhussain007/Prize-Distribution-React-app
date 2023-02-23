@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useState } from "react";
+import PrizeDistribution from "./PrizeDistribution";
+import PrizeDistribution2 from "./PrizeDistribution2";
+import { Routes, Route, Link } from "react-router-dom";
+import { Button } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { color } from "@mui/system";
+import Home from "./home";
+
+const StyledButtonDiv = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  padding: "20px",
+  alignItems: "center",
+  height: "500px",
+  gap: "20px",
+  backgroundColor: "#fff",
+  borderRadius: "10px",
+
+  "& .Button-container": {
+    display: "flex",
+    gap: "20px",
+  },
+  "& .Button-container > a": {
+    textDecoration: "none",
+  },
+}));
 
 function App() {
+  // const [input, setInput] = useState("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/prize_distribution" element={<PrizeDistribution />} />
+        <Route path="/prize_distribution2" element={<PrizeDistribution2 />} />
+      </Routes>
     </div>
   );
 }
