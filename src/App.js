@@ -9,26 +9,6 @@ import { styled } from "@mui/material/styles";
 import { color } from "@mui/system";
 import Home from "./home";
 
-const StyledButtonDiv = styled("div")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  padding: "20px",
-  alignItems: "center",
-  height: "500px",
-  gap: "20px",
-  backgroundColor: "#fff",
-  borderRadius: "10px",
-
-  "& .Button-container": {
-    display: "flex",
-    gap: "20px",
-  },
-  "& .Button-container > a": {
-    textDecoration: "none",
-  },
-}));
-
 function App() {
   // const [input, setInput] = useState("");
 
