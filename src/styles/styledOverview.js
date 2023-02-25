@@ -3,7 +3,6 @@ import { styled } from "@mui/material";
 
 const StyledButtonDiv = styled("div")(({ theme }) => ({
   display: "flex",
-  flexDirection: "column",
   justifyContent: "center",
   padding: "20px",
   alignItems: "center",
@@ -16,6 +15,7 @@ const StyledButtonDiv = styled("div")(({ theme }) => ({
   "& Button": {
     backgroundColor: "#ff8100",
     color: "black",
+    width: "200px",
   },
 
   "& Button:hover": {

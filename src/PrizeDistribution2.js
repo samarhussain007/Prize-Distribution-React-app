@@ -2,6 +2,75 @@ import React, { useState } from "react";
 import seedrandom from "seedrandom";
 import Graph from "./Graph";
 import "./App.css";
+import styled from "@emotion/styled";
+import { Button } from "@mui/material";
+
+const StyledForm = styled("div")(
+  () => `
+  gap: 40px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 20px;
+  background-color: #f5f5f5;
+  color: #000;
+
+  .cta-section{
+    width: 40%;
+  }
+
+  .navbar{
+    text-align: center;
+  }
+
+  .form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: start;
+    padding: 20px;
+  }
+
+  .graph-representation{
+    height: 500px;
+    width: 50%;
+  }
+  .response-container{
+    display: flex;
+    gap: 20px;
+    width: 1000px; 
+  }
+
+  input{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #666;
+  }
+  .input-container{
+    display: flex;
+    gap: 20px;
+  }
+
+  label{
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  Button{
+    background-color: #ff8100;
+    color: #000;
+    width: 200px;
+  }
+
+  .main-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+`
+);
 function PrizeDistribution2() {
   const [no_of_slots, setNoOfSlots] = useState("");
   const [entryFee, setEntryFee] = useState("");
@@ -15,7 +84,17 @@ function PrizeDistribution2() {
   const [alpha, setAlpha] = useState("");
   const [error, setError] = useState("");
   const [graphData, setGraphData] = useState();
-  var resultArr = [];
+  const resultArr = [];
+  const dummyArr = [
+    ["1", "70"],
+    ["2", "30"],
+    ["3", "20"],
+    ["4-10", "15"],
+    ["11-20", "10"],
+    ["21-30", "5"],
+  ];
+
+  const dummyResponse = [75, 30, 20, 15, 15, 15, 15, 10, 10, 10, 10, 10, 5];
 
   const setSlots = function (ns) {
     if (!ns || ns < 0) return;
@@ -44,6 +123,15 @@ function PrizeDistribution2() {
     return mapedarray;
   };
   const createTable = (response1) => {
+    let arrNum;
+    if (response === "") {
+      arrNum = dummyResponse;
+      console.log(arrNum);
+    } else {
+      arrNum = response;
+    }
+
+    // console.log(arrNum);
     return (
       <table border="1">
         <thead>
@@ -53,11 +141,11 @@ function PrizeDistribution2() {
         </thead>
         <tbody>
           <tr>
-            <th>Total Prize : {response.reduce((a, b) => a + b, 0)}</th>
+            <th>Total Prize : {arrNum.reduce((a, b) => a + b, 0)}</th>
             <th>
               Excess amount:{" "}
               {Math.abs(
-                response.reduce((a, b) => a + b, 0) -
+                arrNum.reduce((a, b) => a + b, 0) -
                   (no_of_slots * entryFee -
                     no_of_slots * entryFee * (gdCommision / 100))
               )}
@@ -195,82 +283,96 @@ function PrizeDistribution2() {
     setResponse(result);
     setGraphData(true);
   };
-  console.log(response);
   return (
-    <div>
-      <h1>Prize Distribution TYPE-2 (Pareto Distribution)</h1>
-      <div className="PrizeDistribution-form">
-        <form onSubmit={handleSubmit} className="form">
-          <label>Number of slots:</label>
-          <input
-            type="number"
-            value={no_of_slots}
-            required
-            onChange={(e) => setNoOfSlots(e.target.value)}
-          />
-          <label>Entry fee:</label>
-          <input
-            type="number"
-            value={entryFee}
-            required
-            onChange={(e) => setEntryFee(e.target.value)}
-          />
-          <label>GD Commission:</label>
-          <input
-            type="number"
-            value={gdCommision}
-            required
-            onChange={(e) => setGdCommision(e.target.value)}
-          />
-          <label>Winner percentage:</label>
-          <input
-            type="number"
-            value={winnerPercentage}
-            required
-            onChange={(e) => setWinnerPercentage(e.target.value)}
-          />
-          <label>Tier:</label>
-          <input
-            type="number"
-            value={tier}
-            required
-            onChange={(e) => setTier(e.target.value)}
-          />
-          <label>last Prize</label>
-          <input
-            type="number"
-            value={lp}
-            required
-            onChange={(e) => setLp(Number(e.target.value))}
-          />
-          <label>alpha</label>
-          <input
-            type="number"
-            value={alpha}
-            required
-            onChange={(e) => setAlpha(Number(e.target.value))}
-          />
-          <label>Initial Winners:</label>
-          <input
-            type="Number"
-            value={initialSlots}
-            required
-            onChange={(e) => setInitialSlots(e.target.value)}
-          />
-          {setSlots(Number(initialSlots))}
-          <button type="submit">Distribute Prizes</button>
-        </form>
+    <StyledForm>
+      <nav className="navbar">
+        <h1>Prize Distribution TYPE-2 (Pareto Distribution)</h1>
+      </nav>
+      <div className="main-wrapper">
+        <div className="cta-section">
+          <div className="PrizeDistribution-form">
+            <form onSubmit={handleSubmit} className="form">
+              <label>Number of slots:</label>
+              <input
+                type="number"
+                value={no_of_slots}
+                required
+                onChange={(e) => setNoOfSlots(e.target.value)}
+              />
+
+              <label>Entry fee:</label>
+              <input
+                type="number"
+                value={entryFee}
+                required
+                onChange={(e) => setEntryFee(e.target.value)}
+              />
+              <label>GD Commission:</label>
+              <input
+                type="number"
+                value={gdCommision}
+                required
+                onChange={(e) => setGdCommision(e.target.value)}
+              />
+              <label>Winner percentage:</label>
+              <input
+                type="number"
+                value={winnerPercentage}
+                required
+                onChange={(e) => setWinnerPercentage(e.target.value)}
+              />
+
+              <label>Tier:</label>
+              <input
+                type="number"
+                value={tier}
+                required
+                onChange={(e) => setTier(e.target.value)}
+              />
+
+              <label>last Prize</label>
+              <input
+                type="number"
+                value={lp}
+                required
+                onChange={(e) => setLp(Number(e.target.value))}
+              />
+              <label>alpha</label>
+              <input
+                type="number"
+                value={alpha}
+                required
+                onChange={(e) => setAlpha(Number(e.target.value))}
+              />
+              <label>Initial Winners:</label>
+              <input
+                type="Number"
+                value={initialSlots}
+                required
+                onChange={(e) => setInitialSlots(e.target.value)}
+              />
+
+              {setSlots(Number(initialSlots))}
+              <Button variant="contained" color="primary" type="submit">
+                Distribute Prize
+              </Button>
+            </form>
+          </div>
+        </div>
         <div className="response-container">
-          {error && <div className="error">{error}</div>}
           <div className="response">
-            {!response ? "" : createTable(resultArr)}
+            {!response ? createTable(dummyArr) : createTable(resultArr)}
           </div>
           <div className="graph-representation">
-            {graphData && <Graph data={response} />}
+            {!response ? (
+              <Graph data={dummyResponse} />
+            ) : (
+              <Graph data={response} />
+            )}
           </div>
         </div>
       </div>
-    </div>
+    </StyledForm>
   );
 }
 
