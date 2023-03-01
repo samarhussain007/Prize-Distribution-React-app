@@ -1,16 +1,22 @@
 import React from "react";
 import { styled } from "@mui/material";
 
-const StyledButtonDiv = styled("div")(({ theme }) => ({
+const StyledOverview = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   padding: "20px",
   alignItems: "center",
   height: "500px",
+  width: "500px",
   gap: "20px",
-  backgroundColor: "rgba(255,255,255,0.4)",
+  backgroundColor: "#222",
   borderRadius: "10px",
   color: "#ff8100",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  margin: "50px auto",
 
   "& Button": {
     backgroundColor: "#ff8100",
@@ -32,4 +38,4 @@ const StyledButtonDiv = styled("div")(({ theme }) => ({
   },
 }));
 
-export default StyledButtonDiv;
+export default StyledOverview;

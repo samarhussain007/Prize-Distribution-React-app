@@ -13,7 +13,7 @@ function App() {
   // const [input, setInput] = useState("");
 
   return (
-    <div>
+    <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/prize_distribution" element={<PrizeDistribution />} />
